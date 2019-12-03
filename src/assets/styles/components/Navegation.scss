@@ -1,0 +1,85 @@
+@import "../Vars.scss";
+
+.navegation{
+    background-color: rgba($color-secundary, 1);
+    height: 40px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+}
+
+.navegation__account{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding-left: 10px;
+}
+
+.navegation__period{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding: 10px;
+}
+
+.navegation__period__list{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 10px;
+    margin-bottom: 0px;
+    border-radius: 10px;
+}
+
+.navegation__period__current{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.navegation__period:hover .navegation__period__list, .navegation__period__list:hover{
+    display: flex;
+}
+
+.navegation__period__img{
+    padding-left: 6px;
+    width: 25px;
+    color: white;
+}
+
+.navegation__period__list{
+    display: none;
+    width: 100px;
+    padding: 0px;
+    position: absolute;
+    top: 130px;
+    right: 25px;
+    text-align: right;
+    background-color: rgba($color-principal,1);
+    
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 0;
+    border: 6px solid white;
+}
+
+
+.navegation__period__list__item{
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    color: black;
+}
+
+.navegation__period__list__item:hover{
+    background-color: rgba($color-secundary,1);
+    color: black;
+    cursor: pointer;
+}

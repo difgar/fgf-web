@@ -1,0 +1,36 @@
+@import "../Vars.scss";
+  
+
+.header{
+    background-color: white;
+    color: white;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.header--img{
+    background-color: white;
+    width: 200px;
+}
+
+.header__menu{
+    color: black;
+    display: flex;
+    flex-direction: row;
+    align-self: flex-end;
+    margin-right: -10px;
+}
+
+.header__menu__item{
+    padding: 10px;
+    background-color: rgba($color-principal, 1);
+    border-radius: 10px 10px 0px 0px;
+    margin-bottom: -10px;
+}
+
+.header__menu__item:hover{
+    background-color: rgba($color-principal,0.5);
+}

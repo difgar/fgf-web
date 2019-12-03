@@ -1,0 +1,15 @@
+@import "../Vars.scss";
+
+.tree{
+    /*background: linear-gradient(90deg, rgba(var(--secundary),0.5) 0%, rgba(var(--secundary),0.5) 100%);*/
+    /*background-color: rgba(var(--principal),0.5);*/
+    width: 30%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding-top: 6px;
+    padding-left: 6px;
+    padding-right: 6px;
+}

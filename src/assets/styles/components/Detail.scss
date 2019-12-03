@@ -1,0 +1,92 @@
+@import "../Vars.scss";
+
+.detail{   
+    /*background: linear-gradient(90deg, rgba($color-secundary,0.7) 0%, rgba($color-secundary,0.7) 100%);*/
+    /*background-color: rgba($color-principal,0.5);*/
+    width: 70%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding-right: 6px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+
+.detail__title{
+    width: 100%;
+    height: 35px;
+    padding: 10px;
+    background-color: rgba($color-secundary,1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+    font-weight: bold;
+    border-radius: 10px 10px 0px 0px;
+}
+
+.detail__body{
+    width: 100%;
+    height: calc(100% - 35px);
+    padding: 6px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    border-radius: 0px 0px 10px 10px;
+}
+
+.detail__body__table{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.detail__body__table__column--date{
+    width: 85px;
+    text-align: center;
+}
+
+.detail__body__table__column--text{
+    text-align: left;
+}
+
+.detail__body__table__column--number{
+    width: 110px;
+    text-align: right;
+}
+
+.detail__body__tbody{
+    overflow: scroll;
+    width: 100%;
+}
+
+.detail__body__thead{
+    width: 100%;
+}
+
+tr:nth-child(odd):hover td,
+tr:nth-child(even):hover td{
+    background-color: rgba($color-secundary,0.8);
+    padding: 5px;
+    cursor: pointer;
+}
+
+tr:nth-child(odd) td{
+    background-color: rgba($color-secundary,0.4);
+    padding: 5px;
+}
+
+tr:nth-child(even) td{
+    background-color: rgba($color-secundary,0.2);
+    padding: 5px;
+}
+
+th{
+    background-color: rgba($color-principal,0.8);
+    height: 35px;
+    padding: 5px;
+    text-align: center;
+}

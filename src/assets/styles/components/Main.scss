@@ -1,0 +1,8 @@
+@import "../Vars.scss";
+
+.main{
+    background-color: rgba($color-principal,1);
+    height: calc(100vh - 160px);
+    display: flex;
+    flex-direction: row;
+}

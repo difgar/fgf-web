@@ -1,0 +1,31 @@
+@import "./Vars.scss";
+
+*{
+  margin: 0px;
+  font-family: sans-serif;
+  font-size: 14px;
+  box-sizing: border-box;
+  /*border: 1px dotted chartreuse;*/
+}
+
+body{
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+a{
+  color: white;
+  text-decoration: none;
+
+}
+a:hover{
+  color: white;
+  text-decoration: underline;
+  font-weight: normal;
+}
+
+.app,
+#app{
+  height: 100%;
+}
