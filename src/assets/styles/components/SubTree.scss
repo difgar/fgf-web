@@ -32,16 +32,22 @@
     border-radius: 10px 10px 0px 0px;
 }
 
-.subTree__title__tab.active:hover,
-.subTree__title__tab:hover{
+.subTree__title__tab.active{
+    background-color: rgba($color-secundary,1);
+}
+
+.subTree__title__tab:hover,
+.subTree__title__tab.active:hover{
     background-color: rgba($color-secundary,0.8);
     color: black;
     cursor: pointer;
 }
 
-.subTree__title__tab.active{
-    background-color: rgba($color-secundary,1);
+.subTree__title__tab:focus,
+.subTree__title__tab.active:focus{
+    outline: none;
 }
+
 
 .subTree__body{
     width: 100%;
