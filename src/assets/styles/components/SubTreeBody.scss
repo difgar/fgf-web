@@ -1,0 +1,27 @@
+@import "../Vars.scss";
+
+.subTree__body ul,
+.subTree__body li{
+    list-style-type:none;
+    background-color: white;
+    padding-left: 3px;
+    width: 100%;
+}
+
+.subTree__body__wrapper{
+    width: 100%;
+    height: 100%;
+    overflow: scroll;
+}
+
+.subTree__body__wrapper__item{
+    width: 100%;
+    padding: 2px;
+}
+.subTree__body__wrapper__item:hover{
+    background-color: rgba($color-secundary,0.8);
+    cursor: pointer;
+}
+.subTree__body__wrapper__item:focus{
+    outline: none;
+}

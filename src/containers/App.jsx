@@ -9,21 +9,50 @@ import Detail from '../components/Detail';
 import Footer from '../components/Footer';
 import useInitialState from '../hooks/useInitialState';
 
-const API = 'http://localhost:3000/socios';
+const API_SOCIOS = 'http://localhost:3000/socios';
+const API_SOCIEDADES = 'http://localhost:3000/sociedades';
+const API_TERCEROS = 'http://localhost:3000/terceros';
+const API_CUENTAS_VIGENTES = 'http://localhost:3000/cuentasVigentes';
+const API_CUENTAS_CANCELADAS = 'http://localhost:3000/cuentasCanceladas';
 
 const App = () => {
-  const initialState = useInitialState(API);
+  const initialStateSocios = useInitialState(API_SOCIOS);
+  const initialStateSociedades = useInitialState(API_SOCIEDADES);
+  const initialStateTerceros = useInitialState(API_TERCEROS);
+  const initialStateCuentasVigentes = useInitialState(API_CUENTAS_VIGENTES);
+  const initialStateCuentasCanceladas = useInitialState(API_CUENTAS_CANCELADAS);
+
   const tabPersonas = {
-    titulos: ['Socios', 'Sociedades', 'Terceros'],
-    idActivo: 0,
-    data: initialState,
-  };
+    tabs: [{
+      titulo: 'Socios',
+      active: true,
+      data: initialStateSocios,
+    },
+    {
+      titulo: 'Sociedades',
+      active: false,
+      data: initialStateSociedades,
+    },
+    {
+      titulo: 'Terceros',
+      active: false,
+      data: initialStateTerceros,
+    },
+    ] };
 
   const tabCuentas = {
-    titulos: ['Cuentas vigentes', 'Cuentas canceladas'],
-    idActivo: 0,
-    data: initialState,
-  };
+    tabs: [
+      {
+        titulo: 'Cuentas Vigentes',
+        active: true,
+        data: initialStateCuentasVigentes,
+      },
+      {
+        titulo: 'Cuentas Canceladas',
+        active: false,
+        data: initialStateCuentasCanceladas,
+      },
+    ] };
 
   return (
     <div className='app'>

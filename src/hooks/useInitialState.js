@@ -2,15 +2,15 @@ import { useEffect, useState } from 'react';
 
 const useInitialState = (API) => {
 
-  const [cuentas, setCuentas] = useState([]);
+  const [dataRaw, setDataRaw] = useState([]);
 
   useEffect(() => {
     fetch(API)
       .then((response) => response.json())
-      .then((data) => setCuentas(data));
+      .then((data) => setDataRaw(data));
   }, []);
 
-  return cuentas;
+  return dataRaw;
 };
 
 export default useInitialState;
