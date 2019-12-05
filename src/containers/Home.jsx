@@ -1,5 +1,6 @@
-import '../assets/styles/App.scss';
+import '../assets/styles/Home.scss';
 import React from 'react';
+import { connect } from 'react-redux';
 import Header from '../components/Header';
 import Navegation from '../components/Navegation';
 import Main from '../components/Main';
@@ -7,36 +8,23 @@ import Tree from '../components/Tree';
 import SubTree from '../components/SubTree';
 import Detail from '../components/Detail';
 import Footer from '../components/Footer';
-import useInitialState from '../hooks/useInitialState';
 
-const API_SOCIOS = 'http://localhost:3000/socios';
-const API_SOCIEDADES = 'http://localhost:3000/sociedades';
-const API_TERCEROS = 'http://localhost:3000/terceros';
-const API_CUENTAS_VIGENTES = 'http://localhost:3000/cuentasVigentes';
-const API_CUENTAS_CANCELADAS = 'http://localhost:3000/cuentasCanceladas';
-
-const App = () => {
-  const initialStateSocios = useInitialState(API_SOCIOS);
-  const initialStateSociedades = useInitialState(API_SOCIEDADES);
-  const initialStateTerceros = useInitialState(API_TERCEROS);
-  const initialStateCuentasVigentes = useInitialState(API_CUENTAS_VIGENTES);
-  const initialStateCuentasCanceladas = useInitialState(API_CUENTAS_CANCELADAS);
-
+const Home = ({ socios, sociedades, terceros, cuentasVigentes, cuentasCanceladas }) => {
   const tabPersonas = {
     tabs: [{
       titulo: 'Socios',
       active: true,
-      data: initialStateSocios,
+      data: socios,
     },
     {
       titulo: 'Sociedades',
       active: false,
-      data: initialStateSociedades,
+      data: sociedades,
     },
     {
       titulo: 'Terceros',
       active: false,
-      data: initialStateTerceros,
+      data: terceros,
     },
     ] };
 
@@ -45,12 +33,12 @@ const App = () => {
       {
         titulo: 'Cuentas Vigentes',
         active: true,
-        data: initialStateCuentasVigentes,
+        data: cuentasVigentes,
       },
       {
         titulo: 'Cuentas Canceladas',
         active: false,
-        data: initialStateCuentasCanceladas,
+        data: cuentasCanceladas,
       },
     ] };
 
@@ -70,4 +58,14 @@ const App = () => {
   );
 };
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    socios: state.socios,
+    sociedades: state.sociedades,
+    terceros: state.terceros,
+    cuentasVigentes: state.cuentasVigentes,
+    cuentasCanceladas: state.cuentasCanceladas,
+  };
+};
+
+export default connect(mapStateToProps, null)(Home);
