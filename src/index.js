@@ -28,8 +28,6 @@ callAPI(API_CUENTAS_CANCELADAS).then((cuentasCanceladas) => initialState = { ...
 */
 //const initialState = { socios, sociedades, terceros, cuentasVigentes, cuentasCanceladas };
 
-
-
 const initialState = {
   'socios': [
     {
@@ -163,6 +161,24 @@ const initialState = {
               'id': 13,
               'saldo': 13134569,
               'vigencia': '9999-12-31',
+              'movimientos': [
+                {
+                  'fecha': '2019-05-13',
+                  'descripcion': 'GMF del prestamo de Valeria',
+                  'debe': '',
+                  'haber': '123.000',
+                  'saldo': '123.000',
+                  'transactionId': '123456',
+                },
+                {
+                  'fecha': '2019-06-04',
+                  'descripcion': 'Abono al GMF del prestamo de Valeria',
+                  'debe': '23.000',
+                  'haber': '',
+                  'saldo': '100.000',
+                  'transactionId': '987654',
+                },
+              ],
             },
           ],
         },
@@ -223,6 +239,7 @@ const initialState = {
   ],
   'nav': [{ 'nombre': 'home', 'id': 0 }],
   'detail': { titulo: 'Balance', saldo: 0.0, summary: true },
+  'period': 2019,
 };
 
 const store = createStore(reducer, initialState);

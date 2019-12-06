@@ -7,7 +7,7 @@ import getParent, { navBar } from '../moduls/jsonUtil';
 
 const Detail = (props) => {
 
-  const { detail, allCuentas } = { ...props };
+  const { detail, allCuentas } = props;
 
   const handleUpdateNav = (item) => {
     navBar.splice(0, navBar.length);
@@ -17,9 +17,9 @@ const Detail = (props) => {
   };
 
   const handleUpdateDetail = (item) => {
-    const movimientos = item.cuentas && item.cuentas.map((cuenta) => {
+    const movimientos = item.cuentas ? item.cuentas.map((cuenta) => {
       return { ...cuenta };
-    });
+    }) : item.movimientos;
 
     props.updateDetail({ ...item, movimientos, titulo: item.nombre, summary: item.cuentas !== undefined });
   };
@@ -66,12 +66,16 @@ const Detail = (props) => {
                 <tr
                   key={cuenta.id}
                   onDoubleClick={() => {
-                    handleUpdateNav(cuenta);
-                    handleUpdateDetail(cuenta);
+                    if (detail.summary) {
+                      handleUpdateNav(cuenta);
+                      handleUpdateDetail(cuenta);
+                    } else {
+                      alert(`Mostrar transaccion de: ${cuenta.transactionId}`);
+                    }
                   }}
                 >
                   {!detail.summary && <td align='center'>{cuenta.fecha}</td>}
-                  <td align='left'>{cuenta.nombre}</td>
+                  <td align='left'>{cuenta.nombre || cuenta.descripcion}</td>
                   {!detail.summary && <td align='right'>{cuenta.debe}</td>}
                   {!detail.summary && <td align='right'>{cuenta.haber}</td>}
                   <td align='right'>{cuenta.saldo}</td>
@@ -88,6 +92,7 @@ const Detail = (props) => {
 
 Detail.propTypes = {
   detail: propTypes.object,
+  allCuentas: propTypes.array,
 };
 
 const mapDispatchToProps = {

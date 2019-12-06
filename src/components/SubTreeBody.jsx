@@ -7,7 +7,7 @@ import getParent, { navBar } from '../moduls/jsonUtil';
 
 const SubTreeBody = (props) => {
 
-  const { data, show, wrapper, allCuentas } = { ...props };
+  const { data, show, wrapper, allCuentas } = props;
   const [selectedItemIdx, setSelectedItemIdx] = useState(-1);
   if (data !== undefined) {
     data.filter((item) => item != null).forEach((item) => {
@@ -23,9 +23,10 @@ const SubTreeBody = (props) => {
   };
 
   const handleUpdateDetail = (item) => {
-    const movimientos = item.cuentas && item.cuentas.map((cuenta) => {
+    debugger;
+    const movimientos = item.cuentas ? item.cuentas.map((cuenta) => {
       return { ...cuenta };
-    });
+    }) : item.movimientos;
 
     props.updateDetail({ ...item, movimientos, titulo: item.nombre, summary: item.cuentas !== undefined });
   };
@@ -61,6 +62,8 @@ const SubTreeBody = (props) => {
 SubTreeBody.propTypes = {
   tabs: propTypes.array,
   show: propTypes.bool,
+  wrapper: propTypes.bool,
+  allCuentas: propTypes.array,
 };
 
 const mapDispatchToProps = {

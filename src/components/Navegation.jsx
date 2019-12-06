@@ -7,9 +7,9 @@ import expandArrow from '../assets/statics/expandArrow.png';
 import getParent, { navBar } from '../moduls/jsonUtil';
 
 const Navegation = (props) => {
-  const { nav, allCuentas } = props;
+  const { nav, allCuentas, period } = props;
 
-  const [selectedYear, setSelectedYear] = useState(2019);
+  const [selectedYear, setSelectedYear] = useState(period);
   const currentDate = new Date();
   const currentYear = currentDate.getFullYear();
   const years = [];
@@ -25,9 +25,9 @@ const Navegation = (props) => {
   };
 
   const handleUpdateDetail = (item) => {
-    const movimientos = item.cuentas && item.cuentas.map((cuenta) => {
+    const movimientos = item.cuentas ? item.cuentas.map((cuenta) => {
       return { ...cuenta };
-    });
+    }) : item.movimientos;
 
     const propDetail = { ...item, movimientos, titulo: item.nombre, summary: item.cuentas !== undefined };
     if (item.id === 0) {
@@ -87,6 +87,7 @@ const Navegation = (props) => {
 
 Navegation.propTypes = {
   nav: propTypes.array,
+  allCuentas: propTypes.array,
 };
 
 const mapDispatchToProps = {

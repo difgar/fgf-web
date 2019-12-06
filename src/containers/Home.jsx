@@ -9,7 +9,7 @@ import SubTree from '../components/SubTree';
 import Detail from '../components/Detail';
 import Footer from '../components/Footer';
 
-const Home = ({ socios, sociedades, terceros, allCuentas, cuentasVigentes, cuentasCanceladas, nav, detail }) => {
+const Home = ({ socios, sociedades, terceros, allCuentas, cuentasVigentes, cuentasCanceladas, nav, detail, period }) => {
   const tabPersonas = {
     tabs: [{
       titulo: 'Socios',
@@ -45,7 +45,7 @@ const Home = ({ socios, sociedades, terceros, allCuentas, cuentasVigentes, cuent
   return (
     <div className='app'>
       <Header />
-      <Navegation nav={nav} allCuentas={allCuentas} />
+      <Navegation nav={nav} allCuentas={allCuentas} period={period} />
       <Main>
         <Tree>
           <SubTree {...tabPersonas} allCuentas={allCuentas} />
@@ -104,6 +104,7 @@ const mapStateToProps = (state) => {
     cuentasVigentes,
     cuentasCanceladas,
     detail,
+    period: state.period,
   };
 };
 
