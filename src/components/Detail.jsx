@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import propTypes from 'prop-types';
 import { updateNav, updateDetail } from '../actions';
 import '../assets/styles/components/Detail.scss';
 import getParent, { navBar } from '../moduls/jsonUtil';
+import DetailModal from './DetailModal';
 
 const Detail = (props) => {
 
   const { detail, allCuentas } = props;
+  const [transactionId, setTransactionId] = useState(null);
 
   const handleUpdateNav = (item) => {
     navBar.splice(0, navBar.length);
@@ -64,13 +66,13 @@ const Detail = (props) => {
             <tbody>
               {detail.movimientos.map((cuenta) => (
                 <tr
-                  key={cuenta.id}
+                  key={cuenta.transactionId ? cuenta.transactionId : cuenta.id}
                   onDoubleClick={() => {
                     if (detail.summary) {
                       handleUpdateNav(cuenta);
                       handleUpdateDetail(cuenta);
                     } else {
-                      alert(`Mostrar transaccion de: ${cuenta.transactionId}`);
+                      setTransactionId(cuenta.transactionId);
                     }
                   }}
                 >
@@ -86,6 +88,7 @@ const Detail = (props) => {
           </table>
         </div>
       </div>
+      {transactionId && <DetailModal transactionId={transactionId} onClose={() => setTransactionId(null)} />}
     </section>
   );
 };

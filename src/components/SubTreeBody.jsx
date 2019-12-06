@@ -23,7 +23,6 @@ const SubTreeBody = (props) => {
   };
 
   const handleUpdateDetail = (item) => {
-    debugger;
     const movimientos = item.cuentas ? item.cuentas.map((cuenta) => {
       return { ...cuenta };
     }) : item.movimientos;
