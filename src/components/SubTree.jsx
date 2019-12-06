@@ -66,7 +66,7 @@ const SubTree = (props) => {
         tabIndex='0'
       >
         {tabs.map((tab, index) => (
-          <SubTreeBody {...tab} show={index === selectedTabIdx} wrapper={true} key={tab.titulo} />
+          <SubTreeBody {...tab} show={index === selectedTabIdx} wrapper={true} allCuentas={props.allCuentas} key={tab.titulo} />
         ))}
       </div>
     </div>

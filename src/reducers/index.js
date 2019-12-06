@@ -2,6 +2,16 @@
 const reducer = (state, action) => {
 
   switch (action.type) {
+    case 'UPDATE_NAV':
+      return {
+        ...state,
+        nav: action.payload,
+      };
+    case 'UPDATE_DETAIL':
+      return {
+        ...state,
+        detail: action.payload,
+      };
     case 'SET_SOCIO':
       const x = {
         ...state,

@@ -17,6 +17,14 @@
     justify-content: flex-start;
     padding-left: 10px;
 }
+.navegation__account__item:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.navegation__account__item:focus{
+    outline: none;
+}
 
 .navegation__period{
     display: flex;

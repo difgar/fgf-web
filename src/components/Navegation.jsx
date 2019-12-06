@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import propTypes from 'prop-types';
+import { updateNav, updateDetail } from '../actions';
 import '../assets/styles/components/Navegation.scss';
 import expandArrow from '../assets/statics/expandArrow.png';
+import getParent, { navBar } from '../moduls/jsonUtil';
 
-const Navegation = () => {
+const Navegation = (props) => {
+  const { nav, allCuentas } = props;
 
   const [selectedYear, setSelectedYear] = useState(2019);
   const currentDate = new Date();
@@ -12,28 +17,44 @@ const Navegation = () => {
     years.push(year);
   }
 
+  const handleUpdateNav = (item) => {
+    navBar.splice(0, navBar.length);
+    getParent(allCuentas, item);
+    props.updateNav([{ 'nombre': 'home', 'id': 0 }, ...navBar.reverse()]);
+    navBar.splice(0, navBar.length);
+  };
+
+  const handleUpdateDetail = (item) => {
+    const movimientos = item.cuentas && item.cuentas.map((cuenta) => {
+      return { ...cuenta };
+    });
+
+    const propDetail = { ...item, movimientos, titulo: item.nombre, summary: item.cuentas !== undefined };
+    if (item.id === 0) {
+      propDetail.summary = true;
+      propDetail.titulo = 'Balance';
+      propDetail.saldo = 0.0;
+    }
+    props.updateDetail(propDetail);
+  };
+
   return (
     <nav className='navegation'>
       <div className='navegation__account'>
-        <pre><a href='/'>Home</a></pre>
-        <pre>
-          {' '}
-  /
-          {' '}
-          <a href='/'>Activos</a>
-        </pre>
-        <pre>
-          {' '}
-  /
-          {' '}
-          <a href='/'>Bancos</a>
-        </pre>
-        <pre>
-          {' '}
-  /
-          {' '}
-          <a href='/'>Bancolombia</a>
-        </pre>
+        {nav !== undefined && nav.map((path) => (
+          <div
+            className='navegation__account__item'
+            key={path.id}
+            onClick={() => {
+              handleUpdateNav(path);
+              handleUpdateDetail(path);
+            }}
+            role='button'
+            tabIndex='0'
+          >
+            <pre>{`/ ${path.nombre} `}</pre>
+          </div>
+        ))}
       </div>
       <div className='navegation__period'>
         <div
@@ -53,7 +74,6 @@ const Navegation = () => {
               onClick={() => {
                 setSelectedYear(year);
                 document.getElementsByClassName('navegation__period')[0].classList.remove('active');
-                console.log(document.getElementsByClassName('navegation__period')[0].classList);
               }}
             >
               {year}
@@ -65,4 +85,13 @@ const Navegation = () => {
   );
 };
 
-export default Navegation;
+Navegation.propTypes = {
+  nav: propTypes.array,
+};
+
+const mapDispatchToProps = {
+  updateNav,
+  updateDetail,
+};
+
+export default connect(null, mapDispatchToProps)(Navegation);

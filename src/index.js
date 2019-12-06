@@ -107,98 +107,122 @@ const initialState = {
       'id': 678,
     },
   ],
-  'cuentasVigentes': [
+  'cuentas': [
     {
       'nombre': 'Activos',
       'id': 1,
+      'saldo': 15134500,
+      'vigencia': '9999-12-31',
       'cuentas': [
         {
           'nombre': 'Bancos',
           'id': 11,
+          'saldo': 13134567,
+          'vigencia': '9999-12-31',
         },
         {
           'nombre': 'Cuentas x Cobrar',
           'id': 12,
+          'saldo': 13134568,
+          'vigencia': '9999-12-31',
+          'cuentas': [
+            {
+              'nombre': 'Prestamos',
+              'id': 121,
+              'saldo': 13134567,
+              'vigencia': '9999-12-31',
+              'cuentas': [
+                {
+                  'nombre': 'P1',
+                  'id': 1211,
+                  'saldo': 13134567,
+                  'vigencia': '9999-12-31',
+                },
+                {
+                  'nombre': 'P2',
+                  'id': 1212,
+                  'saldo': 13134568,
+                  'vigencia': '9999-12-31',
+                },
+                {
+                  'nombre': 'P3',
+                  'id': 1213,
+                  'saldo': 13134569,
+                  'vigencia': '2017-12-31',
+                },
+              ],
+            },
+            {
+              'nombre': 'Intereses',
+              'id': 12,
+              'saldo': 13134568,
+              'vigencia': '9999-12-31',
+            },
+            {
+              'nombre': 'GMF',
+              'id': 13,
+              'saldo': 13134569,
+              'vigencia': '9999-12-31',
+            },
+          ],
         },
         {
           'nombre': 'Otros',
-          'id': 13,
+          'id': 122,
+          'saldo': 13134569,
+          'vigencia': '9999-12-31',
         },
       ],
     },
     {
       'nombre': 'Pasivos',
       'id': 2,
+      'saldo': 14134500,
+      'vigencia': '9999-12-31',
       'cuentas': [
         {
           'nombre': 'Capital',
           'id': 21,
+          'saldo': 13134500,
+          'vigencia': '9999-12-31',
         },
         {
           'nombre': 'Cuentas por Pagar',
           'id': 22,
+          'saldo': 13134501,
+          'vigencia': '9999-12-31',
         },
         {
           'nombre': 'Otros',
           'id': 23,
+          'saldo': 13134502,
+          'vigencia': '9999-12-31',
         },
       ],
     },
     {
       'nombre': 'Patrimonio',
       'id': 3,
+      'saldo': 17134500,
+      'vigencia': '9999-12-31',
       'cuentas': [
         {
           'nombre': 'Inscripciones',
           'id': 31,
+          'saldo': 131300009,
+          'vigencia': '9999-12-31',
         },
         {
           'nombre': 'Reservas',
           'id': 32,
+          'saldo': 131300008,
+          'vigencia': '9999-12-31',
         },
       ],
     },
   ],
-  'cuentasCanceladas': [
-    {
-      'nombre': 'Activos',
-      'id': 1,
-      'cuentas': [
-        {
-          'nombre': 'Prestamos',
-          'id': 11,
-          'cuentas': [
-            {
-              'nombre': 'Vacaciones',
-              'id': 111,
-            },
-            {
-              'nombre': 'Vehiculo',
-              'id': 121,
-            },
-          ],
-        },
-        {
-          'nombre': 'Intereses Corrientes',
-          'id': 12,
-        },
-      ],
-    },
-    {
-      'nombre': 'Pasivos',
-      'id': 2,
-      'cuentas': [
-        {
-          'nombre': 'Cuentas por Pagar',
-          'id': 22,
-        },
-        {
-          'nombre': 'Otros',
-          'id': 23,
-        },
-      ],
-    },
-  ],
+  'nav': [{ 'nombre': 'home', 'id': 0 }],
+  'detail': { titulo: 'Balance', saldo: 0.0, summary: true },
 };
 
 const store = createStore(reducer, initialState);

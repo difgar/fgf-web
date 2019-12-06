@@ -1,15 +1,34 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import propTypes from 'prop-types';
 import '../assets/styles/components/SubTreeBody.scss';
+import { updateNav, updateDetail } from '../actions';
+import getParent, { navBar } from '../moduls/jsonUtil';
 
-const SubTreeBody = ({ data, show, wrapper }) => {
+const SubTreeBody = (props) => {
 
+  const { data, show, wrapper, allCuentas } = { ...props };
   const [selectedItemIdx, setSelectedItemIdx] = useState(-1);
   if (data !== undefined) {
-    data.forEach((item) => {
+    data.filter((item) => item != null).forEach((item) => {
       item.data = item.cuentas; // eslint-disable-line no-param-reassign
     });
   }
+
+  const handleUpdateNav = (item) => {
+    navBar.splice(0, navBar.length);
+    getParent(allCuentas, item);
+    props.updateNav([{ 'nombre': 'home', 'id': 0 }, ...navBar.reverse()]);
+    navBar.splice(0, navBar.length);
+  };
+
+  const handleUpdateDetail = (item) => {
+    const movimientos = item.cuentas && item.cuentas.map((cuenta) => {
+      return { ...cuenta };
+    });
+
+    props.updateDetail({ ...item, movimientos, titulo: item.nombre, summary: item.cuentas !== undefined });
+  };
 
   return (
     show && data !== undefined && (
@@ -22,7 +41,8 @@ const SubTreeBody = ({ data, show, wrapper }) => {
                 item.data !== undefined && (index !== selectedItemIdx ? setSelectedItemIdx(index) : setSelectedItemIdx(-1)) ;
               }}
               onDoubleClick={() => {
-                alert(`Actualizar Detalle:${item.nombre}`) ;
+                handleUpdateNav(item);
+                handleUpdateDetail(item);
                 item.data !== undefined && (index !== selectedItemIdx ? setSelectedItemIdx(index) : setSelectedItemIdx(-1)) ;
               }}
               role='button'
@@ -30,7 +50,7 @@ const SubTreeBody = ({ data, show, wrapper }) => {
             >
               {`${item.data !== undefined ? (index === selectedItemIdx ? '-' : '+') : '·'} ${item.nombre}`}
             </div>
-            <SubTreeBody {...item} show={index === selectedItemIdx} key={item.nombre} />
+            <SubTreeBody {...props} {...item} show={index === selectedItemIdx} key={item.nombre} />
           </li>
         )))}
       </ul>
@@ -43,4 +63,9 @@ SubTreeBody.propTypes = {
   show: propTypes.bool,
 };
 
-export default SubTreeBody;
+const mapDispatchToProps = {
+  updateNav,
+  updateDetail,
+};
+
+export default connect(null, mapDispatchToProps)(SubTreeBody);
