@@ -31,6 +31,18 @@
     margin-bottom: -10px;
 }
 
+.header__menu__item.active{
+    background-color: rgba($color-secundary, 1);
+    color: white;
+}
+
+.header__menu__item:nth-child(n){
+    border-left: 2px solid white;
+}
+
 .header__menu__item:hover{
     background-color: rgba($color-principal,0.5);
+}
+.header__menu__item:hover.active{
+    background-color: rgba($color-secundary,0.5);
 }

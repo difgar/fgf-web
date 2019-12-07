@@ -240,6 +240,76 @@ const initialState = {
   'nav': [{ 'nombre': 'home', 'id': 0 }],
   'detail': { titulo: 'Balance', saldo: 0.0, summary: true },
   'period': 2019,
+  'transactions': [
+    {
+      'id': '123456',
+      'fecha': '2019-12-11',
+      'movimientos': [
+        {
+          'cuentaId': '5',
+          'cuenta': 'Bancos',
+          'descripcion': 'Descripcion del movimiento 1',
+          'debe': '120.000',
+          'haber': '0',
+        },
+        {
+          'cuentaId': '4',
+          'cuenta': 'CxC',
+          'descripcion': 'Descripcion del movimiento 2',
+          'debe': '0',
+          'haber': '120.000',
+        },
+      ],
+    },
+    {
+      'id': '987654',
+      'fecha': '2019-05-23',
+      'movimientos': [
+        {
+          'cuentaId': '1',
+          'cuenta': 'Bancos',
+          'descripcion': 'Descripcion del movimiento 3',
+          'debe': '150.000',
+          'haber': '0',
+        },
+        {
+          'cuentaId': '2',
+          'cuenta': 'Prestamo',
+          'descripcion': 'Descripcion del movimiento 4',
+          'debe': '0',
+          'haber': '100.000',
+        },
+        {
+          'cuentaId': '3',
+          'cuenta': 'Intereses',
+          'descripcion': 'Descripcion del movimiento 5',
+          'debe': '0',
+          'haber': '50.000',
+        },
+        {
+          'cuentaId': '10',
+          'cuenta': 'Intereses',
+          'descripcion': 'Descripcion del movimiento 5',
+          'debe': '0',
+          'haber': '50.000',
+        },
+        {
+          'cuentaId': '11',
+          'cuenta': 'Intereses',
+          'descripcion': 'Descripcion del movimiento 5',
+          'debe': '0',
+          'haber': '50.000',
+        },
+        {
+          'cuentaId': '12',
+          'cuenta': 'Intereses',
+          'descripcion': 'Descripcion del movimiento 5',
+          'debe': '0',
+          'haber': '50.000',
+        },
+      ],
+    },
+  ],
 };
 
 const store = createStore(reducer, initialState);

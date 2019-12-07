@@ -9,7 +9,7 @@ import SubTree from '../components/SubTree';
 import Detail from '../components/Detail';
 import Footer from '../components/Footer';
 
-const Home = ({ socios, sociedades, terceros, allCuentas, cuentasVigentes, cuentasCanceladas, nav, detail, period }) => {
+const Home = ({ socios, sociedades, terceros, allCuentas, cuentasVigentes, cuentasCanceladas, nav, detail, period, transactions }) => {
   const tabPersonas = {
     tabs: [{
       titulo: 'Socios',
@@ -51,7 +51,7 @@ const Home = ({ socios, sociedades, terceros, allCuentas, cuentasVigentes, cuent
           <SubTree {...tabPersonas} allCuentas={allCuentas} />
           <SubTree {...tabCuentas} allCuentas={allCuentas} />
         </Tree>
-        <Detail detail={detail} allCuentas={allCuentas} />
+        <Detail detail={detail} allCuentas={allCuentas} transactions={transactions} />
       </Main>
       <Footer />
     </div>
@@ -81,11 +81,11 @@ function searchCuenta(cuenta, esVigente) {
 const mapStateToProps = (state) => {
   const cuentasVigentes = state.cuentas.map((cuenta) => {
     return searchCuenta(cuenta, true);
-  });
+  }).filter((cuenta) => cuenta != null);
 
   const cuentasCanceladas = state.cuentas.map((cuenta) => {
     return searchCuenta(cuenta, false);
-  });
+  }).filter((cuenta) => cuenta != null);
 
   const detail = { ...state.detail };
   if (!detail.movimientos) {
@@ -105,6 +105,7 @@ const mapStateToProps = (state) => {
     cuentasCanceladas,
     detail,
     period: state.period,
+    transactions: state.transactions,
   };
 };
 
