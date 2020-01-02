@@ -1,13 +1,11 @@
 import '../assets/styles/Home.scss';
 import React from 'react';
 import { connect } from 'react-redux';
-import Header from '../components/Header';
 import Navegation from '../components/Navegation';
 import Main from '../components/Main';
 import Tree from '../components/Tree';
 import SubTree from '../components/SubTree';
 import Detail from '../components/Detail';
-import Footer from '../components/Footer';
 
 const Home = ({ socios, sociedades, terceros, allCuentas, cuentasVigentes, cuentasCanceladas, nav, detail, period, transactions }) => {
   const tabPersonas = {
@@ -44,7 +42,6 @@ const Home = ({ socios, sociedades, terceros, allCuentas, cuentasVigentes, cuent
 
   return (
     <div className='app'>
-      <Header />
       <Navegation nav={nav} allCuentas={allCuentas} period={period} />
       <Main>
         <Tree>
@@ -53,7 +50,6 @@ const Home = ({ socios, sociedades, terceros, allCuentas, cuentasVigentes, cuent
         </Tree>
         <Detail detail={detail} allCuentas={allCuentas} transactions={transactions} />
       </Main>
-      <Footer />
     </div>
   );
 };
