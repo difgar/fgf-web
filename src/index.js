@@ -29,6 +29,7 @@ callAPI(API_CUENTAS_CANCELADAS).then((cuentasCanceladas) => initialState = { ...
 //const initialState = { socios, sociedades, terceros, cuentasVigentes, cuentasCanceladas };
 
 const initialState = {
+  'user': {},
   'socios': [
     {
       'nombre': 'Diego',

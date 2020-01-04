@@ -56,31 +56,33 @@ const Navegation = (props) => {
           </div>
         ))}
       </div>
-      <div className='navegation__period'>
-        <div
-          className='navegation__period__current'
-          onClick={() => { document.getElementsByClassName('navegation__period')[0].classList.add('active') ; }}
-          role='button'
-          tabIndex='0'
-        >
-          <p>{`Periodo: ${selectedYear}`}</p>
-          <img className='navegation__period__img' src={expandArrow} alt='' />
+      {period && (
+        <div className='navegation__period'>
+          <div
+            className='navegation__period__current'
+            onClick={() => { document.getElementsByClassName('navegation__period')[0].classList.add('active') ; }}
+            role='button'
+            tabIndex='0'
+          >
+            <p>{`Periodo: ${selectedYear}`}</p>
+            <img className='navegation__period__img' src={expandArrow} alt='' />
+          </div>
+          <div className='navegation__period__list'>
+            {years.map((year) => (
+              <p
+                className='navegation__period__list__item'
+                key={year}
+                onClick={() => {
+                  setSelectedYear(year);
+                  document.getElementsByClassName('navegation__period')[0].classList.remove('active');
+                }}
+              >
+                {year}
+              </p>
+            ))}
+          </div>
         </div>
-        <div className='navegation__period__list'>
-          {years.map((year) => (
-            <p
-              className='navegation__period__list__item'
-              key={year}
-              onClick={() => {
-                setSelectedYear(year);
-                document.getElementsByClassName('navegation__period')[0].classList.remove('active');
-              }}
-            >
-              {year}
-            </p>
-          ))}
-        </div>
-      </div>
+      )}
     </nav>
   );
 };
