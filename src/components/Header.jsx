@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter } from 'react-router';
+import { withRouter, Redirect } from 'react-router';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { logoutRequest } from '../actions';
@@ -8,7 +8,7 @@ import logo from '../assets/statics/logo.png';
 
 const Header = (props) => {
 
-  const { user } = props;
+  const { user, location } = props;
 
   const hasUser = Object.keys(user).length > 0;
 
@@ -16,9 +16,9 @@ const Header = (props) => {
     props.history.push('/login');
     props.logoutRequest({});
   };
-
   return (
     <header className='header'>
+      {(!location.pathname.match(/^\/(login)?$/) && !hasUser) ? <Redirect to='/' /> : <></>}
       <Link to='/home'>
         <img className='header--img' src={logo} width='200px' alt='' />
       </Link>

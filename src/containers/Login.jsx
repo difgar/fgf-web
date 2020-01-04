@@ -17,9 +17,11 @@ const Login = (props) => {
   };
 
   const handleSubmit = (event) => {
-    event.preventDefault();
-    props.history.push('/home');
-    props.loginRequest(form);
+    if (form.email.length > 0) {
+      event.preventDefault();
+      props.history.push('/home');
+      props.loginRequest(form);
+    }
   };
 
   return (
