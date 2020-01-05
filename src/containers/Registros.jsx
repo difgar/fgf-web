@@ -1,4 +1,3 @@
-import '../assets/styles/Home.scss';
 import React from 'react';
 import { connect } from 'react-redux';
 import Navegation from '../components/Navegation';
@@ -6,6 +5,7 @@ import Main from '../components/Main';
 import Tree from '../components/Tree';
 import SubTree from '../components/SubTree';
 import Detail from '../components/Detail';
+import '../assets/styles/Registros.scss';
 
 const Registros = ({ socios, sociedades, terceros, allCuentas, cuentasVigentes, cuentasCanceladas, nav, detail, period, transactions }) => {
   const tabPersonas = {

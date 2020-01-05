@@ -37,7 +37,7 @@ const Login = (props) => {
           <div className='login__form__body'>
             <input name='email' onChange={handleInput} placeholder='username' />
             <input name='password' placeholder='password' />
-            <button type='submit'>Enviar</button>
+            <button type='submit'>Entrar</button>
           </div>
         </form>
       </Main>
