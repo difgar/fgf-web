@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { loginRequest } from '../actions';
+import Navegation from '../components/Navegation';
+import Main from '../components/Main';
 import '../assets/styles/Login.scss';
 
 const Login = (props) => {
@@ -25,12 +27,20 @@ const Login = (props) => {
   };
 
   return (
-    <div className='login'>
-      <form onSubmit={handleSubmit}>
-        <input name='email' onChange={handleInput} />
-        <input name='password' />
-        <button type='submit'>Enviar</button>
-      </form>
+    <div className='app login'>
+      <Navegation />
+      <Main>
+        <form className='login__form' onSubmit={handleSubmit}>
+          <div className='login__form__title'>
+            Login
+          </div>
+          <div className='login__form__body'>
+            <input name='email' onChange={handleInput} placeholder='username' />
+            <input name='password' placeholder='password' />
+            <button type='submit'>Enviar</button>
+          </div>
+        </form>
+      </Main>
     </div>
   );
 };
