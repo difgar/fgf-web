@@ -41,7 +41,7 @@
 }
 
 .login__form__body input{
-    width: 200px;
+    width: 230px;
     margin: 10px;
     height: 30px;
     padding: 5px;
@@ -50,7 +50,7 @@
 }
 
 .login__form__body button{
-    width: 200px;
+    width: 230px;
     margin: 10px;
     height: 30px;
     background-color: rgba($color-principal,1);
@@ -71,5 +71,9 @@
     color: black;
     border: 1px solid rgba($color-principal,1);
     cursor: pointer;
+    outline:none;
+}
+
+.login__form__body input:focus{
     outline:none;
 }

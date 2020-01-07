@@ -16,7 +16,7 @@ const Detail = (props) => {
   const handleUpdateNav = (item) => {
     navBar.splice(0, navBar.length);
     getParent(allCuentas, item);
-    props.updateNav([{ 'nombre': 'home', 'id': 0 }, ...navBar.reverse()]);
+    props.updateNav([{ 'nombre': 'Cuentas', 'id': 0 }, ...navBar.reverse()]);
     navBar.splice(0, navBar.length);
   };
 

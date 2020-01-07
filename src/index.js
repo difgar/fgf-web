@@ -238,7 +238,7 @@ const initialState = {
       ],
     },
   ],
-  'nav': [{ 'nombre': 'home', 'id': 0 }],
+  'nav': [{ 'nombre': 'Cuentas', 'id': 0 }],
   'detail': { titulo: 'Balance', saldo: 0.0, summary: true },
   'period': 2019,
   'transactions': [
