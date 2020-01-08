@@ -1,162 +1,96 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import propTypes from 'prop-types';
+import { updateNav, updateDetail } from '../actions';
 import '../assets/styles/components/Detail.scss';
+import getParent, { navBar } from '../moduls/jsonUtil';
+import DetailModal from './DetailModal';
 
-const Detail = ({ children }) => (
-  <section className='detail'>
-    <div className='detail__title'>
-      <div />
-      <div>Bancolombia</div>
-      <div>Saldo: 345.000</div>
-    </div>
-    <div className='detail__body'>
-      <div className='detail__body__thead'>
+const Detail = (props) => {
+
+  const { detail, allCuentas, transactions } = props;
+  const [transactionId, setTransactionId] = useState(null);
+
+  const transaction = transactions.find((element) => element.id === transactionId);
+
+  const handleUpdateNav = (item) => {
+    navBar.splice(0, navBar.length);
+    getParent(allCuentas, item);
+    props.updateNav([{ 'nombre': 'Cuentas', 'id': 0 }, ...navBar.reverse()]);
+    navBar.splice(0, navBar.length);
+  };
+
+  const handleUpdateDetail = (item) => {
+    const movimientos = item.cuentas ? item.cuentas.map((cuenta) => {
+      return { ...cuenta };
+    }) : item.movimientos;
+
+    props.updateDetail({ ...item, movimientos, titulo: item.nombre, summary: item.cuentas !== undefined });
+  };
+
+  return (
+    <section className='detail'>
+      <div className='detail__title'>
+        <div />
+        <div>{detail.titulo}</div>
+        <div>{`Saldo: ${detail.saldo}`}</div>
+      </div>
+      <div className='detail__body'>
         <table className='detail__body__table'>
           <colgroup>
-            <col className='detail__body__table__column--date' />
+            {!detail.summary && <col className='detail__body__table__column--date' />}
             <col className='detail__body__table__column--text' />
-            <col className='detail__body__table__column--number' />
-            <col className='detail__body__table__column--number' />
+            {!detail.summary && <col className='detail__body__table__column--number' />}
+            {!detail.summary && <col className='detail__body__table__column--number' />}
             <col className='detail__body__table__column--number' />
           </colgroup>
           <thead>
             <tr>
-              <th align='center'>Fecha</th>
-              <th align='center'>Descripcion</th>
-              <th align='center'>Debe</th>
-              <th align='center'>Haber</th>
+              {!detail.summary && <th align='center'>Fecha</th>}
+              <th align='center'>{`${!detail.summary ? 'Descripción' : 'Cuenta'}`}</th>
+              {!detail.summary && <th align='center'>Debe</th>}
+              {!detail.summary && <th align='center'>Haber</th>}
               <th align='center'>Saldo</th>
             </tr>
           </thead>
-        </table>
-      </div>
-      <div className='detail__body__tbody'>
-        <table className='detail__body__table'>
-          <colgroup>
-            <col className='detail__body__table__column--date' />
-            <col className='detail__body__table__column--text' />
-            <col className='detail__body__table__column--number' />
-            <col className='detail__body__table__column--number' />
-            <col className='detail__body__table__column--number' />
-          </colgroup>
           <tbody>
-            <tr>
-              <td align='center'>2019/10/11</td>
-              <td align='left'>Pago cuota de Mayo</td>
-              <td align='right'>999.999.999.99</td>
-              <td align='right'>999.999.999.99</td>
-              <td align='right'>999.999.999.99</td>
-            </tr>
-            <tr>
-              <td align='center'>2019/10/14</td>
-              <td align='left'>Pago cuota de Octubre, Pago cuota de Octubre, Pago cuota de Octubre, Pago cuota de Octubre, Pago cuota de Octubre</td>
-              <td align='right'>0</td>
-              <td align='right'>200.000</td>
-              <td align='right'>400.000</td>
-            </tr>
-            <tr>
-              <td align='center'>2019/10/11</td>
-              <td align='left'>Pago cuota de Mayo</td>
-              <td align='right'>999.999.999.99</td>
-              <td align='right'>999.999.999.99</td>
-              <td align='right'>999.999.999.99</td>
-            </tr>
-            <tr>
-              <td align='center'>2019/10/14</td>
-              <td align='left'>Pago cuota de Octubre, Pago cuota de Octubre, Pago cuota de Octubre, Pago cuota de Octubre, Pago cuota de Octubre</td>
-              <td align='right'>0</td>
-              <td align='right'>200.000</td>
-              <td align='right'>400.000</td>
-            </tr>
-            <tr>
-              <td align='center'>2019/10/11</td>
-              <td align='left'>Pago cuota de Mayo</td>
-              <td align='right'>999.999.999.99</td>
-              <td align='right'>999.999.999.99</td>
-              <td align='right'>999.999.999.99</td>
-            </tr>
-            <tr>
-              <td align='center'>2019/10/11</td>
-              <td align='left'>Pago cuota de Mayo</td>
-              <td align='right'>999.999.999.99</td>
-              <td align='right'>999.999.999.99</td>
-              <td align='right'>999.999.999.99</td>
-            </tr>
-            <tr>
-              <td align='center'>2019/10/11</td>
-              <td align='left'>Pago cuota de Mayo</td>
-              <td align='right'>999.999.999.99</td>
-              <td align='right'>999.999.999.99</td>
-              <td align='right'>999.999.999.99</td>
-            </tr>
-            <tr>
-              <td align='center'>2019/10/11</td>
-              <td align='left'>Pago cuota de Mayo</td>
-              <td align='right'>999.999.999.99</td>
-              <td align='right'>999.999.999.99</td>
-              <td align='right'>999.999.999.99</td>
-            </tr>
-            <tr>
-              <td align='center'>2019/10/11</td>
-              <td align='left'>Pago cuota de Mayo</td>
-              <td align='right'>999.999.999.99</td>
-              <td align='right'>999.999.999.99</td>
-              <td align='right'>999.999.999.99</td>
-            </tr>
-            <tr>
-              <td align='center'>2019/10/11</td>
-              <td align='left'>Pago cuota de Mayo</td>
-              <td align='right'>999.999.999.99</td>
-              <td align='right'>999.999.999.99</td>
-              <td align='right'>999.999.999.99</td>
-            </tr>
-            <tr>
-              <td align='center'>2019/10/11</td>
-              <td align='left'>Pago cuota de Mayo</td>
-              <td align='right'>999.999.999.99</td>
-              <td align='right'>999.999.999.99</td>
-              <td align='right'>999.999.999.99</td>
-            </tr>
-            <tr>
-              <td align='center'>2019/10/11</td>
-              <td align='left'>Pago cuota de Mayo</td>
-              <td align='right'>999.999.999.99</td>
-              <td align='right'>999.999.999.99</td>
-              <td align='right'>999.999.999.99</td>
-            </tr>
-            <tr>
-              <td align='center'>2019/10/11</td>
-              <td align='left'>Pago cuota de Mayo</td>
-              <td align='right'>999.999.999.99</td>
-              <td align='right'>999.999.999.99</td>
-              <td align='right'>999.999.999.99</td>
-            </tr>
-            <tr>
-              <td align='center'>2019/10/11</td>
-              <td align='left'>Pago cuota de Mayo</td>
-              <td align='right'>999.999.999.99</td>
-              <td align='right'>999.999.999.99</td>
-              <td align='right'>999.999.999.99</td>
-            </tr>
-            <tr>
-              <td align='center'>2019/10/11</td>
-              <td align='left'>Pago cuota de Mayo</td>
-              <td align='right'>999.999.999.99</td>
-              <td align='right'>999.999.999.99</td>
-              <td align='right'>999.999.999.99</td>
-            </tr>
-            <tr>
-              <td align='center'>2019/10/11</td>
-              <td align='left'>Pago cuota de Mayo</td>
-              <td align='right'>999.999.999.99</td>
-              <td align='right'>999.999.999.99</td>
-              <td align='right'>999.999.999.99</td>
-            </tr>
+            {detail.movimientos.map((cuenta) => (
+              <tr
+                key={cuenta.transactionId ? cuenta.transactionId : cuenta.id}
+                onDoubleClick={() => {
+                  if (detail.summary) {
+                    handleUpdateNav(cuenta);
+                    handleUpdateDetail(cuenta);
+                  } else {
+                    setTransactionId(cuenta.transactionId);
+                  }
+                }}
+              >
+                {!detail.summary && <td align='center'>{cuenta.fecha}</td>}
+                <td align='left'>{cuenta.nombre || cuenta.descripcion}</td>
+                {!detail.summary && <td align='right'>{cuenta.debe}</td>}
+                {!detail.summary && <td align='right'>{cuenta.haber}</td>}
+                <td align='right'>{cuenta.saldo}</td>
+              </tr>
+            ))}
           </tbody>
           <tfoot />
         </table>
       </div>
-    </div>
-  </section>
-);
+      {transactionId && <DetailModal transaction={transaction} onClose={() => setTransactionId(null)} />}
+    </section>
+  );
+};
 
-export default Detail;
+Detail.propTypes = {
+  detail: propTypes.object,
+  allCuentas: propTypes.array,
+  transactions: propTypes.array,
+};
+
+const mapDispatchToProps = {
+  updateNav,
+  updateDetail,
+};
+
+export default connect(null, mapDispatchToProps)(Detail);

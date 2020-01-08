@@ -25,23 +25,33 @@
     color: white;
     font-weight: bold;
     border-radius: 10px 10px 0px 0px;
+    border: 2px solid white;
 }
 
 .detail__body{
     width: 100%;
     height: calc(100% - 35px);
-    padding: 6px;
+    border: 6px white solid;
     background-color: white;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
     border-radius: 0px 0px 10px 10px;
+    overflow: scroll;
 }
 
 .detail__body__table{
     width: 100%;
-    border-collapse: collapse;
+    border-spacing: 1px;
+}
+
+.detail__body__table__caption{
+    background-color: rgba($color-secundary,1);
+    height: 35px;
+    color: white;
+    padding-top: 10px;
+    border: 1.5px solid white;
 }
 
 .detail__body__table__column--date{
@@ -58,17 +68,8 @@
     text-align: right;
 }
 
-.detail__body__tbody{
-    overflow: scroll;
-    width: 100%;
-}
-
-.detail__body__thead{
-    width: 100%;
-}
-
-tr:nth-child(odd):hover td,
-tr:nth-child(even):hover td{
+.detail__body tr:nth-child(odd):hover td,
+.detail__body tr:nth-child(even):hover td{
     background-color: rgba($color-secundary,0.8);
     padding: 5px;
     cursor: pointer;

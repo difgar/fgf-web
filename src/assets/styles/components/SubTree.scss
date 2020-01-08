@@ -32,6 +32,15 @@
     border-radius: 10px 10px 0px 0px;
 }
 
+.subTree__title__tab:nth-child(n-1){
+    border-top: 2px solid white;
+    border-left: 2px solid white;
+}
+.subTree__title__tab:last-child{
+    border-right: 2px solid white;   
+}
+
+
 .subTree__title__tab.active{
     background-color: rgba($color-secundary,1);
 }

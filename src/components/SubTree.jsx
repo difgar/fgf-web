@@ -1,32 +1,73 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import propTypes from 'prop-types';
 import SubTreeBody from './SubTreeBody';
+import { setSocio, deleteSocio } from '../actions';
 import '../assets/styles/components/SubTree.scss';
 
-const SubTree = ({ tabs }) => {
+const SubTree = (props) => {
+  const { tabs } = props;
 
-  tabs.forEach((tab) => {
-    const [show, setShow] = useState(tab.active);
-    tab.show = show; // eslint-disable-line no-param-reassign
-    tab.setShow = setShow; // eslint-disable-line no-param-reassign
-  });
+  const [selectedTabIdx, setSelectedTabIdx] = useState(0);
+
+  const handleSetSocio = () => {
+    props.setSocio({
+      'nombre': 'Jorge',
+      'id': 444,
+      'cuentas': [
+        {
+          'nombre': 'Banco',
+          'id': 987,
+        },
+        {
+          'nombre': 'Inversion',
+          'id': 876,
+        },
+        {
+          'nombre': 'CxC Tags',
+          'id': 765,
+        },
+      ],
+    });
+  };
+
+  const handleDeleteSocio = (socioId) => {
+    props.deleteSocio(socioId);
+  };
 
   return (
     <div className='subTree'>
-      <div className='subTree__title'>
+      <div
+        className='subTree__title'
+        onDoubleClick={handleSetSocio}
+        role='button'
+        tabIndex='0'
+      >
         {tabs.map((tab, index) => {
           let customClassName = 'subTree__title__tab';
-          customClassName += tab.show ? ' active' : '';
+          customClassName += (index === selectedTabIdx ? ' active' : '');
           return (
-            <div className={customClassName} key={tab.titulo} onClick={() => { tabs.forEach((element) => { element.setShow(tab === element) ; }) ; }} role='button' tabIndex='0'>{tab.titulo}</div>
+            <div
+              className={customClassName}
+              key={tab.titulo}
+              onClick={() => setSelectedTabIdx(index)}
+              role='button'
+              tabIndex='0'
+            >
+              {tab.titulo}
+            </div>
           );
         })}
       </div>
-      <div className='subTree__body'>
-        {tabs.map((tab) => {
-          tab.wrapper = true; // eslint-disable-line no-param-reassign
-          return (<SubTreeBody {...tab} key={tab.titulo} />);
-        })}
+      <div
+        className='subTree__body'
+        onDoubleClick={() => handleDeleteSocio(444)}
+        role='button'
+        tabIndex='0'
+      >
+        {tabs.map((tab, index) => (
+          <SubTreeBody {...tab} show={index === selectedTabIdx} wrapper={true} allCuentas={props.allCuentas} key={tab.titulo} />
+        ))}
       </div>
     </div>
   );
@@ -36,4 +77,9 @@ SubTree.propTypes = {
   tabs: propTypes.array,
 };
 
-export default SubTree;
+const mapDispatchToProps = {
+  setSocio,
+  deleteSocio,
+};
+
+export default connect(null, mapDispatchToProps)(SubTree);

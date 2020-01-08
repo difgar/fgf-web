@@ -3,7 +3,7 @@ import '../assets/styles/components/Footer.scss';
 
 const Footer = () => (
   <footer className='footer'>
-    F
+    Copyright © 2020
   </footer>
 );
 
