@@ -6,7 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --mode production",
-    "start": "webpack-dev-server --open --mode development"
+    "start": "webpack-dev-server --open --mode development",
+    "docker:build": "docker build -t fgf-react .",
+    "docker:run": "docker run -p 18080:80 --name fgf-web fgf-react",
+    "docker:stop": "docker rm -f fgf-web"
   },
   "keywords": [],
   "author": "difgar",
