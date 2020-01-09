@@ -35,6 +35,7 @@ const Login = (props) => {
             Login
           </div>
           <div className='login__form__body'>
+            <p>Ingresa tu usuario y contraseña:</p>
             <input name='email' onChange={handleInput} placeholder='username' />
             <input name='password' placeholder='password' />
             <button type='submit'>Entrar</button>
